@@ -13,7 +13,7 @@
 // limitations under the License.
 
 // Headers in this package
-#include <perception_server/perception_server_component.hpp>
+#include "perception_server/perception_server_component.hpp"
 
 #include <memory>
 #include <rclcpp/rclcpp.hpp>
