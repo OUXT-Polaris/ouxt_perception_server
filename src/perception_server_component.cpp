@@ -23,7 +23,7 @@ PerceptionComponent::PerceptionComponent(const rclcpp::NodeOptions & options)
 : Node("image_rectify_node", options)
 {
   declare_parameter("interpolation", 1);
-  get_parameter("interpolation", interpolation_);
+  //get_parameter("interpolation", interpolation_);
 }
 }
 
