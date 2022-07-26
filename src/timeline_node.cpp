@@ -13,7 +13,7 @@
 // limitations under the License.
 
 // Headers in this package
-#include <pkgname/example_component.hpp>
+#include <perception/timeline_component.hpp>
 
 #include <memory>
 #include <rclcpp/rclcpp.hpp>
@@ -22,7 +22,7 @@ int main(int argc, char * argv[])
 {
   rclcpp::init(argc, argv);
   rclcpp::NodeOptions options;
-  auto component = std::make_shared<pkgname::ExampleComponent>(options);
+  auto component = std::make_shared<perception::TimelineComponent>(options);
   rclcpp::spin(component);
   rclcpp::shutdown();
   return 0;

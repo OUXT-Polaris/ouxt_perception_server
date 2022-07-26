@@ -13,20 +13,20 @@
 // limitations under the License.
 
 // Headers in this package
-#include "pkgname/example_component.hpp"
+#include "perception/timeline_component.hpp"
 
 // Components
 #include <rclcpp_components/register_node_macro.hpp>
 
 // Headers needed in this component
 
-namespace pkgname
+namespace perception
 {
-ExampleComponent::ExampleComponent(const rclcpp::NodeOptions & options)
-: Node("example_node", options)
+TimelineComponent::TimelineComponent(const rclcpp::NodeOptions & options)
+: Node("timeline_node", options)
 {
   //TODO:
 }
 }
 
-RCLCPP_COMPONENTS_REGISTER_NODE(pkgname::ExampleComponent)
+RCLCPP_COMPONENTS_REGISTER_NODE(perception::TimelineComponent)

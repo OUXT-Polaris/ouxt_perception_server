@@ -1,35 +1,35 @@
-#ifndef PKGNAME__VISIBILITY_CONTROL_H_
-#define PKGNAME__VISIBILITY_CONTROL_H_
+#ifndef PERCEPTION__VISIBILITY_CONTROL_H_
+#define PERCEPTION__VISIBILITY_CONTROL_H_
 
 // This logic was borrowed (then namespaced) from the examples on the gcc wiki:
 //     https://gcc.gnu.org/wiki/Visibility
 
 #if defined _WIN32 || defined __CYGWIN__
   #ifdef __GNUC__
-    #define PKGNAME_EXPORT __attribute__ ((dllexport))
-    #define PKGNAME_IMPORT __attribute__ ((dllimport))
+    #define PERCEPTION_EXPORT __attribute__ ((dllexport))
+    #define PERCEPTION_IMPORT __attribute__ ((dllimport))
   #else
-    #define PKGNAME_EXPORT __declspec(dllexport)
-    #define PKGNAME_IMPORT __declspec(dllimport)
+    #define PERCEPTION_EXPORT __declspec(dllexport)
+    #define PERCEPTION_IMPORT __declspec(dllimport)
   #endif
-  #ifdef PKGNAME_BUILDING_LIBRARY
-    #define PKGNAME_PUBLIC PKGNAME_EXPORT
+  #ifdef PERCEPTION_BUILDING_LIBRARY
+    #define PERCEPTION_PUBLIC PERCEPTION_EXPORT
   #else
-    #define PKGNAME_PUBLIC PKGNAME_IMPORT
+    #define PERCEPTION_PUBLIC PERCEPTION_IMPORT
   #endif
-  #define PKGNAME_PUBLIC_TYPE PKGNAME_PUBLIC
-  #define PKGNAME_LOCAL
+  #define PERCEPTION_PUBLIC_TYPE PERCEPTION_PUBLIC
+  #define PERCEPTION_LOCAL
 #else
-  #define PKGNAME_EXPORT __attribute__ ((visibility("default")))
-  #define PKGNAME_IMPORT
+  #define PERCEPTION_EXPORT __attribute__ ((visibility("default")))
+  #define PERCEPTION_IMPORT
   #if __GNUC__ >= 4
-    #define PKGNAME_PUBLIC __attribute__ ((visibility("default")))
-    #define PKGNAME_LOCAL  __attribute__ ((visibility("hidden")))
+    #define PERCEPTION_PUBLIC __attribute__ ((visibility("default")))
+    #define PERCEPTION_LOCAL  __attribute__ ((visibility("hidden")))
   #else
-    #define PKGNAME_PUBLIC
-    #define PKGNAME_LOCAL
+    #define PERCEPTION_PUBLIC
+    #define PERCEPTION_LOCAL
   #endif
-  #define PKGNAME_PUBLIC_TYPE
+  #define PERCEPTION_PUBLIC_TYPE
 #endif
 
-#endif  // PKGNAME__VISIBILITY_CONTROL_H_
+#endif  // PERCEPTION__VISIBILITY_CONTROL_H_

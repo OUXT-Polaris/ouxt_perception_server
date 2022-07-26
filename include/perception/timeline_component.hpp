@@ -14,22 +14,22 @@
 
 #pragma once
 
-#include "pkgname/visibility_control.h"
+#include "perception/visibility_control.h"
 
 // Headers in ROS2
 #include <rclcpp/rclcpp.hpp>
 
 // Headers needed in pub/sub, exposed types
 #include <memory> // shared_ptr in pub_
-//#include <perception_msgs/msg/tracking2_d.hpp> // Tracking2D in pub_
+#include <perception_msgs/msg/tracking2_d.hpp> // Tracking2D in pub_
 
-namespace pkgname
+namespace perception
 {
-class ExampleComponent : public rclcpp::Node
+class TimelineComponent : public rclcpp::Node
 {
 public:
-  PKGNAME_PUBLIC
-  explicit ExampleComponent(const rclcpp::NodeOptions & options);
+  PERCEPTION_PUBLIC
+  explicit TimelineComponent(const rclcpp::NodeOptions & options);
 
 private:
 //  std::shared_ptr<rclcpp::Publisher<perception_msgs::msg::Tracking2D>> pub_;
