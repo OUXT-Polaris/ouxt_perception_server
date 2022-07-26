@@ -1,4 +1,4 @@
-// Copyright (c) 2020 OUXT Polaris
+// Copyright (c) 2022 OUXT Polaris
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -13,18 +13,17 @@
 // limitations under the License.
 
 // Headers in this package
-#include "perception_server/perception_server_component.hpp"
+#include <pkgname/example_component.hpp>
+
 #include <memory>
-#include <rclcpp_components/register_node_macro.hpp>
+#include <rclcpp/rclcpp.hpp>
 
-namespace perception_server
+int main(int argc, char * argv[])
 {
-PerceptionComponent::PerceptionComponent(const rclcpp::NodeOptions & options)
-: Node("image_rectify_node", options)
-{
-  declare_parameter("interpolation", 1);
-  //get_parameter("interpolation", interpolation_);
+  rclcpp::init(argc, argv);
+  rclcpp::NodeOptions options;
+  auto component = std::make_shared<pkgname::ExampleComponent>(options);
+  rclcpp::spin(component);
+  rclcpp::shutdown();
+  return 0;
 }
-}
-
-RCLCPP_COMPONENTS_REGISTER_NODE(perception_server::PerceptionComponent)

@@ -13,17 +13,20 @@
 // limitations under the License.
 
 // Headers in this package
-#include "perception_server/perception_server_component.hpp"
+#include "pkgname/example_component.hpp"
 
-#include <memory>
-#include <rclcpp/rclcpp.hpp>
+// Components
+#include <rclcpp_components/register_node_macro.hpp>
 
-int main(int argc, char * argv[])
+// Headers needed in this component
+
+namespace pkgname
 {
-  rclcpp::init(argc, argv);
-  rclcpp::NodeOptions options;
-  auto component = std::make_shared<perception_server::PerceptionComponent>(options);
-  rclcpp::spin(component);
-  rclcpp::shutdown();
-  return 0;
+ExampleComponent::ExampleComponent(const rclcpp::NodeOptions & options)
+: Node("example_node", options)
+{
+  //TODO:
 }
+}
+
+RCLCPP_COMPONENTS_REGISTER_NODE(pkgname::ExampleComponent)

@@ -1,16 +1,16 @@
 cmake_minimum_required(VERSION 3.8)
-project(perception_server)
+project(perception)
+set(COMP_NAME "Timeline")
+string(TOLOWER ${COMP_NAME} COMP_NAME_LOWER)
 
-# Error output
+
 if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
   add_compile_options(-Wall -Wextra -Wpedantic)
 endif()
 
 # find dependencies
-find_package(ament_cmake REQUIRED)
-find_package(rclcpp REQUIRED)
-find_package(rclcpp_components REQUIRED)
-find_package(perception_msgs REQUIRED)
+find_package (ament_cmake_auto REQUIRED)
+ament_auto_find_build_dependencies()
 
 if(BUILD_TESTING)
   find_package(ament_lint_auto REQUIRED)
@@ -23,51 +23,23 @@ if(BUILD_TESTING)
   ament_lint_auto_find_test_dependencies()
 endif()
 
-
-include_directories(
-  include
-  ${rclcpp_INCLUDE_DIRS}
-  ${rclcpp_components_INCLUDE_DIRS}
-  ${perception_msgs_INCLUDE_DIRS}
+# Create the component target
+ament_auto_add_library(${PROJECT_NAME}-${COMP_NAME_LOWER}_component SHARED
+    src/${COMP_NAME_LOWER}_component.cpp
 )
+target_compile_definitions(${PROJECT_NAME}-${COMP_NAME_LOWER}_component
+  PRIVATE ${PROJECT_NAME}_BUILDING_DLL)
+rclcpp_components_register_nodes(${PROJECT_NAME}-${COMP_NAME_LOWER}_component
+ "${PROJECT_NAME}::${COMP_NAME}Component")
+# ---------------------------
 
-
-# Component
-add_library(perception_server_component SHARED
-  src/perception_server_component.cpp
-  )
-target_compile_definitions(perception_server_component
-  PRIVATE "PERCEPTION_SERVER_COMPONENT_BUILDING_DLL")
-ament_target_dependencies(perception_server_component
-  rclcpp
-  rclcpp_components
-  perception_msgs
-  )
-rclcpp_components_register_nodes(perception_server_component
- "perception_server::PerceptionComponent")
-
-
-
-# Node
-add_executable(perception_server_node
-  src/perception_server_node.cpp
+# Create the executor target
+ament_auto_add_executable(${PROJECT_NAME}-${COMP_NAME_LOWER}_node
+    NO_TARGET_LINK_LIBRARIES
+    src/${COMP_NAME_LOWER}_node.cpp
 )
-target_link_libraries(perception_server_node
- perception_server_component)
-ament_target_dependencies(perception_server_node
-  rclcpp
-  rclcpp_components
-  )
+target_link_libraries(${PROJECT_NAME}-${COMP_NAME_LOWER}_node
+ ${PROJECT_NAME}-${COMP_NAME_LOWER}_component)
+# --------------------------
 
-#install
-install(TARGETS
-  perception_server_node
-  DESTINATION lib/perception_server
-)
-install(TARGETS perception_server_component
-  ARCHIVE DESTINATION lib
-  LIBRARY DESTINATION lib
-  RUNTIME DESTINATION bin
-  INCLUDES DESTINATION include)
-
-ament_package()
+ament_auto_package()
