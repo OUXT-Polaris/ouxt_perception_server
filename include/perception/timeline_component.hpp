@@ -32,7 +32,7 @@ public:
   explicit TimelineComponent(const rclcpp::NodeOptions & options);
 
 private:
-//  std::shared_ptr<rclcpp::Publisher<perception_msgs::msg::Tracking2D>> pub_;
-//  std::shared_ptr<rclcpp::Subscription<perception_msgs::msg::Tracking2D>> sub_;
+  //  std::shared_ptr<rclcpp::Publisher<perception_msgs::msg::Tracking2D>> pub_;
+  //  std::shared_ptr<rclcpp::Subscription<perception_msgs::msg::Tracking2D>> sub_;
 };
 }  // namespace perception
