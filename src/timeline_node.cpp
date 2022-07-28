@@ -13,9 +13,8 @@
 // limitations under the License.
 
 // Headers in this package
-#include <perception/timeline_component.hpp>
-
 #include <memory>
+#include <perception/timeline_component.hpp>
 #include <rclcpp/rclcpp.hpp>
 
 int main(int argc, char * argv[])
