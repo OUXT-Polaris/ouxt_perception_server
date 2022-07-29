@@ -27,6 +27,6 @@ TimelineComponent::TimelineComponent(const rclcpp::NodeOptions & options)
 {
   //TODO:
 }
-}
+}  // namespace perception
 
 RCLCPP_COMPONENTS_REGISTER_NODE(perception::TimelineComponent)

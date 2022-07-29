@@ -1,3 +1,17 @@
+// Copyright (c) 2022 OUXT Polaris
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
 #ifndef PERCEPTION__VISIBILITY_CONTROL_H_
 #define PERCEPTION__VISIBILITY_CONTROL_H_
 
@@ -5,31 +19,31 @@
 //     https://gcc.gnu.org/wiki/Visibility
 
 #if defined _WIN32 || defined __CYGWIN__
-  #ifdef __GNUC__
-    #define PERCEPTION_EXPORT __attribute__ ((dllexport))
-    #define PERCEPTION_IMPORT __attribute__ ((dllimport))
-  #else
-    #define PERCEPTION_EXPORT __declspec(dllexport)
-    #define PERCEPTION_IMPORT __declspec(dllimport)
-  #endif
-  #ifdef PERCEPTION_BUILDING_LIBRARY
-    #define PERCEPTION_PUBLIC PERCEPTION_EXPORT
-  #else
-    #define PERCEPTION_PUBLIC PERCEPTION_IMPORT
-  #endif
-  #define PERCEPTION_PUBLIC_TYPE PERCEPTION_PUBLIC
-  #define PERCEPTION_LOCAL
+#ifdef __GNUC__
+#define PERCEPTION_EXPORT __attribute__((dllexport))
+#define PERCEPTION_IMPORT __attribute__((dllimport))
 #else
-  #define PERCEPTION_EXPORT __attribute__ ((visibility("default")))
-  #define PERCEPTION_IMPORT
-  #if __GNUC__ >= 4
-    #define PERCEPTION_PUBLIC __attribute__ ((visibility("default")))
-    #define PERCEPTION_LOCAL  __attribute__ ((visibility("hidden")))
-  #else
-    #define PERCEPTION_PUBLIC
-    #define PERCEPTION_LOCAL
-  #endif
-  #define PERCEPTION_PUBLIC_TYPE
+#define PERCEPTION_EXPORT __declspec(dllexport)
+#define PERCEPTION_IMPORT __declspec(dllimport)
+#endif
+#ifdef PERCEPTION_BUILDING_LIBRARY
+#define PERCEPTION_PUBLIC PERCEPTION_EXPORT
+#else
+#define PERCEPTION_PUBLIC PERCEPTION_IMPORT
+#endif
+#define PERCEPTION_PUBLIC_TYPE PERCEPTION_PUBLIC
+#define PERCEPTION_LOCAL
+#else
+#define PERCEPTION_EXPORT __attribute__((visibility("default")))
+#define PERCEPTION_IMPORT
+#if __GNUC__ >= 4
+#define PERCEPTION_PUBLIC __attribute__((visibility("default")))
+#define PERCEPTION_LOCAL __attribute__((visibility("hidden")))
+#else
+#define PERCEPTION_PUBLIC
+#define PERCEPTION_LOCAL
+#endif
+#define PERCEPTION_PUBLIC_TYPE
 #endif
 
 #endif  // PERCEPTION__VISIBILITY_CONTROL_H_
